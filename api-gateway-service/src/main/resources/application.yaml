@@ -1,0 +1,49 @@
+spring:
+  redis:
+    port: 6379
+    host: localhost
+  main:
+    web-application-type: reactive
+  session:
+    store-type: redis
+    timeout: 1m
+
+  webflux:
+    base-path: /netw-apigw
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin, RETAIN_FIRST
+        - SessionValidation
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origins: '*'
+            allowed-methods: '*'
+            allowed-headers: '*'
+        add-to-simple-url-handler-mapping: true
+      routes:
+        - id: security-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=${spring.webflux.base-path}/security/**
+          filters:
+            - name: StripPath
+  sleuth:
+    reactor:
+      instrumentation-type: manual
+management:
+  health:
+    redis:
+      enabled: true
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: '*'
+    jmx:
+      exposure:
+        include: '*'
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

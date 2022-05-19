@@ -1,0 +1,6 @@
+rootProject.name = 'demo-redis-session'
+
+include 'store-service'
+include 'security-service'
+include 'api-gateway-service'
+
