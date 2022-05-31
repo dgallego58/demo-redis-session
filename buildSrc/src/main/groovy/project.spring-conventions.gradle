@@ -9,7 +9,7 @@ plugins {
 
 }
 
-group 'co.demo.example'
+group 'co.com.dgallego58'
 version '1.0.0'
 
 repositories {

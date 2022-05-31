@@ -50,7 +50,7 @@ import java.util.stream.Stream;
 public class SecurityConfig {
 
     private static final Logger log = LoggerFactory.getLogger(SecurityConfig.class);
-    private static final String[] excludedPaths = {"/session/{id}", "/session/authenticate"};
+    private static final String[] excludedPaths = {"/stream","/session/{id}", "/session/authenticate"};
 
 
     @Bean
@@ -58,7 +58,7 @@ public class SecurityConfig {
         http.formLogin().disable();
         http.httpBasic().disable();
         http.addFilterAt(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
-        http.authorizeHttpRequests(auth -> auth.mvcMatchers("/session/{id}", "/session/authenticate").permitAll()
+        http.authorizeHttpRequests(auth -> auth.mvcMatchers("/stream","/session/{id}", "/session/authenticate").permitAll()
                                                .anyRequest().authenticated());
         http.csrf().disable();
         //    http.userDetailsService(userDetailsRepository());

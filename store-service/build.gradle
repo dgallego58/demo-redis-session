@@ -1,5 +1,7 @@
 plugins {
-    id 'java'
+    id 'project.aws-conventions'
 }
 
-
+dependencies {
+    implementation 'ch.qos.logback:logback-classic:1.2.11'
+}

@@ -88,7 +88,7 @@ public class SecurityConfig {
     @Bean
     public WebSessionIdResolver webSessionIdResolver() {
         var sessionIdResolver = new CookieWebSessionIdResolver();
-        sessionIdResolver.addCookieInitializer(rcb -> rcb.secure(true).httpOnly(true).sameSite("Strict"));
+        sessionIdResolver.addCookieInitializer(rcb -> rcb.secure(false).httpOnly(true).sameSite("Lax"));
         sessionIdResolver.setCookieName("X-Auth-Token");
         return sessionIdResolver;
     }
